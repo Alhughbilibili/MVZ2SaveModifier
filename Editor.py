@@ -384,16 +384,16 @@ class DataHandler:
         del self.current_data['level']['seedPacks'][enum]["properties"]["mvz2:seed/rechargeSpeed"]
 
     def set_seedPack_rechargeId(self, enum, Id):
-        self.current_data['level']['seedPacks'][enum]["properties"]["rechargeId"] = {"_t": "PVZEngine.NamespaceID","_v": Id}
+        self.current_data['level']['seedPacks'][enum]["properties"]["mvz2:seed/rechargeId"] = {"_t": "PVZEngine.NamespaceID","_v": Id}
 
     def get_seedPack_rechargeId(self, enum):
         try:
-            return str(self.current_data['level']['seedPacks'][enum]["properties"]["rechargeId"]['_v'])
+            return str(self.current_data['level']['seedPacks'][enum]["properties"]["mvz2:seed/rechargeId"]['_v'])
         except:
             return None
 
     def remove_seedPack_rechargeId(self, enum):
-        del self.current_data['level']['seedPacks'][enum]["properties"]["rechargeId"]
+        del self.current_data['level']['seedPacks'][enum]["properties"]["mvz2:seed/rechargeId"]
 
     def set_seedPack_recharge(self, enum, time):
         self.current_data['level']['seedPacks'][enum]["properties"]["mvz2:seed/recharge"] = {"_t": "System.Single","_v": float(time)}

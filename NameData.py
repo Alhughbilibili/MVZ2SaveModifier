@@ -115,93 +115,93 @@ _text_data = { 'title':                      {'zh': 'MVZ2存档修改器 v3.-4 b
 _language = "zh"
 
 # region 选择语言窗口
-import winreg
-import tkinter as tk
-from tkinter import ttk
+# import winreg
+# import tkinter as tk
+# from tkinter import ttk
 
-class LanguageSelector:
-    def __init__(self, on_select):
-        self.on_select = on_select
+# class LanguageSelector:
+#     def __init__(self, on_select):
+#         self.on_select = on_select
 
-        self.root = tk.Tk()
-        self.root.withdraw()
+#         self.root = tk.Tk()
+#         self.root.withdraw()
 
-        # 窗口设置
-        self.selector = tk.Toplevel()
-        self.selector.title("Oops")
-        self.selector.geometry("400x240")
-        self.selector.grab_set()
+#         # 窗口设置
+#         self.selector = tk.Toplevel()
+#         self.selector.title("Oops")
+#         self.selector.geometry("400x240")
+#         self.selector.grab_set()
 
-        # 主容器
-        container = ttk.Frame(self.selector)
-        container.pack(padx=20, pady=20, fill="both", expand=True)
+#         # 主容器
+#         container = ttk.Frame(self.selector)
+#         container.pack(padx=20, pady=20, fill="both", expand=True)
         
-        # 文字信息
-        text_content = """
-Failed to read language setting
-It looks like you are using a language pack
-未能成功读取游戏语言设置
-您似乎正在使用语言包
-Choose your language/请选择语言
-"""
+#         # 文字信息
+#         text_content = """
+# Failed to read language setting
+# It looks like you are using a language pack
+# 未能成功读取游戏语言设置
+# 您似乎正在使用语言包
+# Choose your language/请选择语言
+# """
         
-        lbl_info = tk.Label(
-            container,
-            text=text_content,
-            justify="center",
-            wraplength=350
-        )
-        lbl_info.pack(pady=10)
+#         lbl_info = tk.Label(
+#             container,
+#             text=text_content,
+#             justify="center",
+#             wraplength=350
+#         )
+#         lbl_info.pack(pady=10)
 
-        btnframe = tk.Frame(container)
-        btnframe.pack()
-        tk.Button(btnframe, text="English", command=lambda:self.on_close("en")).pack(side=tk.LEFT, padx=5)
-        tk.Button(btnframe, text="简体中文", command=lambda:self.on_close("zh")).pack(side=tk.LEFT, padx=5)
-        # 窗口关闭时退出程序
-        self.selector.protocol("WM_DELETE_WINDOW", lambda:self.on_close('zh'))
+#         btnframe = tk.Frame(container)
+#         btnframe.pack()
+#         tk.Button(btnframe, text="English", command=lambda:self.on_close("en")).pack(side=tk.LEFT, padx=5)
+#         tk.Button(btnframe, text="简体中文", command=lambda:self.on_close("zh")).pack(side=tk.LEFT, padx=5)
+#         # 窗口关闭时退出程序
+#         self.selector.protocol("WM_DELETE_WINDOW", lambda:self.on_close('zh'))
         
-        # 等待用户选择
-        self.root.wait_window(self.selector)
+#         # 等待用户选择
+#         self.root.wait_window(self.selector)
 
-    def on_close(self, lang):
-        self.on_select(lang)
-        self.selector.destroy()
-        self.root.destroy()
+#     def on_close(self, lang):
+#         self.on_select(lang)
+#         self.selector.destroy()
+#         self.root.destroy()
 
-def _get_language():
-    key_path = r"Software\\Cuerzor\\MinecraftVSZombies2"
+# def _get_language():
+#     key_path = r"Software\\Cuerzor\\MinecraftVSZombies2"
 
-    key = winreg.OpenKey(winreg.HKEY_CURRENT_USER,key_path,0,winreg.KEY_READ)
-    i = 0
-    while True:
-        try:
-            name, value, _ = winreg.EnumValue(key, i)
-            if name.startswith("Language"):
-                value_data=value
-                break
-            i+=1
-        except OSError:
-            break
-    winreg.CloseKey(key)
+#     key = winreg.OpenKey(winreg.HKEY_CURRENT_USER,key_path,0,winreg.KEY_READ)
+#     i = 0
+#     while True:
+#         try:
+#             name, value, _ = winreg.EnumValue(key, i)
+#             if name.startswith("Language"):
+#                 value_data=value
+#                 break
+#             i+=1
+#         except OSError:
+#             break
+#     winreg.CloseKey(key)
 
-    if value_data == b'en-US\x00':
-        _set_language("en")
-    elif value_data == b'zh-Hans\x00':
-        _set_language("zh")
-    else:
-        _choose_language()
+#     if value_data == b'en-US\x00':
+#         _set_language("en")
+#     elif value_data == b'zh-Hans\x00':
+#         _set_language("zh")
+#     else:
+#         _choose_language()
 
-def _set_language(lang):
-    global _language
-    if lang == "zh":
-        _language = "zh"
-    if lang == "en":
-        _language = "en"
+# def _set_language(lang):
+#     global _language
+#     if lang == "zh":
+#         _language = "zh"
+#     if lang == "en":
+#         _language = "en"
 
-def _choose_language():
-    LanguageSelector(on_select=_set_language)
+# def _choose_language():
+#     LanguageSelector(on_select=_set_language)
 
-_get_language()
+# _get_language()
 # endregion
 
 class BilingualDataset:
